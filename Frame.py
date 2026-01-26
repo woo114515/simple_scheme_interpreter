@@ -16,10 +16,12 @@ class Frame:
     def get(self,name):
         '''
         return variable
-        
         '''
-        value = self.bounds.get(name)
-        if value == None:
+        if value in self.bounds:
+            value = self.bounds.get(name)
+        else:
+            if self.father == None:
+                raise Exception(f"there is no symbol {name}")
             value = self.father.get(name)
         return value
     

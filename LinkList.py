@@ -7,6 +7,7 @@ class LinkList:
     consisted of first and rest 
     '''
     def __init__(self,fisrt,rest):
+        assert ((rest is nil) or isinstance(rest,LinkList)),"it cannot form a LinkList"
         self.first = fisrt
         self.rest = rest
 
