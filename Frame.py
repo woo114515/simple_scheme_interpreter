@@ -1,5 +1,5 @@
 '''
-module of program's frame
+module of the program's frame
 '''
 class Frame:
     '''
@@ -21,7 +21,7 @@ class Frame:
             value = self.bounds.get(name)
         else:
             if self.father == None:
-                raise Exception(f"there is no symbol {name}")
+                return None
             value = self.father.get(name)
         return value
     

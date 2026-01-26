@@ -20,6 +20,12 @@ class LinkList:
         string = string[:-1]
         string+=')'
         return string
+    
+    def len(self):
+        if not (self.rest is nil):
+            return 1 + self.rest.len()
+        else:
+            return 1
 
 class nil:
     '''
