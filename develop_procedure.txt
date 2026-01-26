@@ -1,0 +1,4 @@
+1:establish program's structure,including basic classes functiones and module they belong to.
+2:allocate modules to paticipants
+3:write test for module
+4:make devlop schedule

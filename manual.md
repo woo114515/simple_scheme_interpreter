@@ -1,7 +1,7 @@
 ### Modular
 
 #### Input
-
+read from text files or read from terminal
 #### Interpret
 Interpret from **pair** in scheme (a string class     when input in python) to **LinkList** in python.
 

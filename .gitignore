@@ -1,3 +1,4 @@
 test/
 temp/
 draft.md
+__pycache__/
