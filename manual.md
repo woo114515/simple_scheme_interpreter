@@ -36,6 +36,6 @@ Two function will be defined, **eval** and **apply**.
     def __init__(self, father_frame):
         self.father = father_frame
         self.bonuds = {}
-    def bound(name, value):
+    def bound(self,name, value):
         self.bounds["name"] = value
   ```
