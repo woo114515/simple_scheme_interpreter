@@ -6,7 +6,7 @@ class Frame:
     frame where programes run
     '''
     
-    def __init__(self,father_frame):
+    def __init__(self,father_frame=None):
         self.father = father_frame
         self.bounds = {}
 

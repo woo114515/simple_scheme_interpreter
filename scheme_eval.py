@@ -5,15 +5,24 @@ which input in the format of LinkList
 from LinkList import LinkList,nil
 from Frame import Frame
 from DefaultOperator import *
+
+# the usual input is "1", not 1
 def isnumber(var):
     '''
     determine whether the variable is a number
     '''
-    if isinstance(var,int):
-        return True
-    if isinstance(var,float):
-        return True
-    return False
+    try:
+        var = eval(var)
+        if isinstance(var,int):
+            return True
+        if isinstance(var,float):
+            return True
+    except:
+        if isinstance(var,int):
+            return True
+        if isinstance(var,float):
+            return True
+        return False
 
 def isoperator(var,frame):
     if var in operator_dic:
@@ -27,15 +36,26 @@ def isdefine(var):
         return True
     return False
 
+'''
+把这些函数定义扔到DefaultOperator里去
+'''
+
 def evaluate(equation,env):
     '''
     
     :param equation: is LinkList 
     :param frame: is Frame
     '''
-    assert isinstance(env,Frame),"env must in LinkList form"
+    # the usual input is "1", not 1
+    # AND WHERE IS THE VARIABE LIKE 'a', 'x' a shit mount! (doge)
+    # you should fix it, @BarCodein
     if not isinstance(equation,LinkList):
-        return equation
+        if isnumber(equation):
+            return eval(equation)
+        else:
+            return equation
+
+    
     first = equation.first
     #operator
     if isoperator(first,env):
@@ -44,7 +64,8 @@ def evaluate(equation,env):
         return apply(operator,env,args)
     #number
     if isnumber(first):
-        return first
+        return eval(first)
+    # the usual input is "1", not 1
 
     
     #define
