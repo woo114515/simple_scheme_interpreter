@@ -11,22 +11,22 @@ def isnumber(var):
     '''
     determine whether the variable is a number
     '''
-    try:
-        var = eval(var)
-        if isinstance(var,int):
-            return True
-        if isinstance(var,float):
-            return True
-    except:
-        if isinstance(var,int):
-            return True
-        if isinstance(var,float):
-            return True
-        return False
+    if isinstance(var,int):
+        return True
+    if isinstance(var,float):
+        return True
+    return False
 
-def isoperator(var,frame):
+def isoperator(var,env):
     if var in operator_dic:
         return True
+    if var in env.bounds:
+        value = env.bounds.get(var)
+        if isinstance(value,procedure):
+            return True
+    return False
+
+def issymbol(var,frame):
     if var in frame.bounds:
         return True
     return False
@@ -46,14 +46,16 @@ def evaluate(equation,env):
     :param equation: is LinkList 
     :param frame: is Frame
     '''
-    # the usual input is "1", not 1
+    assert isinstance(env,Frame)
     # AND WHERE IS THE VARIABE LIKE 'a', 'x' a shit mount! (doge)
     # you should fix it, @BarCodein
     if not isinstance(equation,LinkList):
         if isnumber(equation):
-            return eval(equation)
-        else:
             return equation
+        if issymbol(equation,env):
+            return env.bounds.get(equation)
+        raise Exception(f"{equation} can't be caculate")
+        
 
     
     first = equation.first
