@@ -61,7 +61,10 @@ def evaluate(equation,env):
     first = equation.first
     #operator
     if isoperator(first,env):
-        operator = operator_dic[first]
+        if issymbol(first,env):
+            operator = env.get(first)
+        else:
+            operator = operator_dic[first]
         args = equation.rest#this might be changed later
         return apply(operator,env,args)
     #number
@@ -108,5 +111,13 @@ def assign(env,args):
         value = evaluate(equation,env)
         env.bound(symbol,value)
 
-def Lambda(env,args,equation):
-    pass
+def Lambda(env,argument,equation):
+    assert isinstance(env,Frame)
+    func_env = env.subframe()
+    
+    def fuc(*args):
+        for symbol,value in zip(argument,args):
+            func_env.bound(symbol,value)
+        answer = evaluate(equation,func_env)
+        return answer
+    return fuc
