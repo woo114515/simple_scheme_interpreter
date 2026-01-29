@@ -47,8 +47,6 @@ def evaluate(equation,env):
     :param frame: is Frame
     '''
     assert isinstance(env,Frame)
-    # AND WHERE IS THE VARIABE LIKE 'a', 'x' a shit mount! (doge)
-    # you should fix it, @BarCodein
     if not isinstance(equation,LinkList):
         if isnumber(equation):
             return equation
@@ -87,14 +85,28 @@ def apply(operator,env,args):
     assert isinstance(operator,procedure),"operator must be a procedure"
     assert isinstance(args,LinkList),"args must be a LinkList"
     assert isinstance(env,Frame),"env must be a Frame"
+    func = operator.function
+    num_args = operator.arg_num
+    need_env = operator.need_envirnment
+    if num_args is None:
+        if need_env:
+            apply_value = func(args,env)
+        else:
+            apply_value = func(args)
+        return apply_value
     arguments = []
     t = args
     while not t is nil:
         value = evaluate(t.first,env)
         arguments.append(value)
         t = t.rest
-    func = operator.function
-    apply_value = func(*arguments)
+    
+    if num_args!=len(arguments):
+        raise Exception("args number wrong")
+    if need_env:
+        apply_value = func(*arguments,env)
+    else:
+        apply_value = func(*arguments)
     return apply_value
 
 def assign(env,args):
