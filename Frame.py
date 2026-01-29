@@ -17,7 +17,7 @@ class Frame:
         '''
         return variable
         '''
-        if value in self.bounds:
+        if name in self.bounds:
             value = self.bounds.get(name)
         else:
             if self.father == None:
