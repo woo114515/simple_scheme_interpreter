@@ -66,8 +66,7 @@ def evaluate(equation,env):
         return apply(operator,env,args)
     #number
     if isnumber(first):
-        return eval(first)
-    # the usual input is "1", not 1
+        return first
 
     
     #define
