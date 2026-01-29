@@ -1,14 +1,11 @@
 from scheme_eval import *
-
 glo = Frame(None)
-
-d = LinkList('define',LinkList('a',LinkList(1,nil)))
-
-l = LinkList('+',LinkList(1,LinkList(2,nil)))
+fuc = LinkList('sum',LinkList('a',LinkList('b',nil)))
+add = LinkList('+',LinkList('a',LinkList('b',nil)))
+d = LinkList('define',LinkList(fuc,add))
+evaluate(d,glo)
+l = LinkList('sum',LinkList(1,LinkList(2,nil)))
 s = LinkList('*',LinkList(1,LinkList(2,nil)))
 t = LinkList('+',LinkList(l,LinkList(s,nil)))
 k = LinkList("1",nil)
-print(evaluate(k,glo))
-print(evaluate(d,glo))
-a = LinkList('+',LinkList('a',LinkList('a',nil)))
-print(evaluate(a,glo))
+print(evaluate(l,glo))

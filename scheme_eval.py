@@ -81,6 +81,9 @@ def evaluate(equation,env):
     pass
 
 def apply(operator,env,args):
+    '''
+    function to call back operator on args
+    '''
     assert isinstance(operator,procedure),"operator must be a procedure"
     assert isinstance(args,LinkList),"args must be a LinkList"
     assert isinstance(env,Frame),"env must be a Frame"
@@ -95,6 +98,9 @@ def apply(operator,env,args):
     return apply_value
 
 def assign(env,args):
+    '''
+    function dealing with command 'define'
+    '''
     assert isinstance(env,Frame)
     if isinstance(args.first,LinkList):
         # defining function
@@ -112,6 +118,9 @@ def assign(env,args):
         env.bound(symbol,value)
 
 def Lambda(env,argument,equation):
+    '''
+    function to define a fuction
+    '''
     assert isinstance(env,Frame)
     func_env = env.subframe()
     
