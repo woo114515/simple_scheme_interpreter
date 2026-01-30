@@ -95,7 +95,23 @@ def fif(equation,env):
             value = scheme_eval.evaluate(alternative,env)
     return value
 
-
+def fcond(equation,env):
+    assert isinstance(equation,LinkList)
+    t = equation
+    while not t is nil:
+        clause = t.first
+        t = t.rest
+        if clause.first == 'else':
+            value = scheme_eval.evaluate(clause.rest,env)
+            return value
+        else:
+            predicate = clause.first
+            consequent = clause.rest
+            condition = scheme_eval.evaluate(predicate,env)
+            if condition:
+                value = scheme_eval.evaluate(consequent,env)
+                return value
+    return None
 
 add = procedure(f_add,2)
 minus = procedure(f_minus,2)
@@ -111,8 +127,9 @@ fuc_and = procedure(fand,None,True)
 fuc_or = procedure(f_or,None,True)
 fuc_begin = procedure(fbegin,None,True)
 fuc_if = procedure(fif,None,True)
+fuc_cond = procedure(fcond,None,True)
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
                 "cdr":cdr,"length":length,"and":fuc_and,"or":fuc_or,
-                "begin":fuc_begin,"if":fuc_if}
+                "begin":fuc_begin,"if":fuc_if,"cond":fuc_cond}

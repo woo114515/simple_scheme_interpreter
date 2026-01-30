@@ -47,11 +47,13 @@ if __name__ == '__main__':
     eqa_if = LinkList('if',LinkList(eqa_predic,
                         LinkList(eqa_conse,LinkList(eqa_alt,nil))))
     print(evaluate(eqa_if,glo))
-    '''
-    #defines
-    eqa1 = LinkList('define', LinkList("a", LinkList(1, nil)))
-    eqa2 = "a"
-    print(eqa1)
-    print(evaluate(eqa1, glo))
-    print(eqa2)
-    print(evaluate(eqa2, glo))
+    print('*'*10)
+
+    #cond
+    eqa_c1 = LinkList(LinkList(False,nil),LinkList(-1,nil))
+    eqa_c2 = LinkList('else',LinkList(1,nil))
+    eqa_cond = LinkList('cond',LinkList(eqa_c1,LinkList(eqa_c2,nil)))
+    print(evaluate(eqa_cond,glo))
+    print('*'*10)
+    
+    
