@@ -6,7 +6,6 @@ from LinkList import LinkList,nil
 from Frame import Frame
 from DefaultOperator import *
 
-# the usual input is "1", not 1
 def isnumber(var):
     '''
     determine whether the variable is a number
