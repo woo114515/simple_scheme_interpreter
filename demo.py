@@ -4,7 +4,7 @@ from Frame import Frame
 if __name__ == '__main__':
     glo = Frame(None)
 
-    '''
+    
     #single number
     print(evaluate(1,glo))
     print(evaluate(LinkList(1,nil),glo))

@@ -43,6 +43,11 @@ def less_than(a,b):
         return True
     return False
 
+def equal_to(a,b):
+    if a==b:
+        return True
+    return False
+
 def makecons(first,rest):
     if isinstance(rest,LinkList):
         return LinkList(first,rest)
@@ -150,6 +155,7 @@ odd = procedure(isodd,1)
 null = procedure(isnull,1)
 greater = procedure(greater_than,2)
 less = procedure(less_than,2)
+equal = procedure(equal_to,2)
 cons = procedure(makecons,2)
 car = procedure(fcar,1)
 cdr = procedure(fcdr,1)
@@ -170,6 +176,6 @@ operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
                 "cdr":cdr,"length":length,"and":fuc_and,"or":fuc_or,
                 "begin":fuc_begin,"if":fuc_if,"cond":fuc_cond,
-                ">":greater,"<":less,"display":fuc_display,
+                ">":greater,"<":less,"=":equal,"display":fuc_display,
                 "displayln":fuc_displayln,"boolean?":fuc_isboolean,
                 "number?":fuc_isnumber,"num?":fuc_isnum}
