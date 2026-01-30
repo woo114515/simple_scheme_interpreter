@@ -6,9 +6,9 @@ Function:
     begin:support
     and:support
     or:support
-    con:unsupport
-    car:unsupport
-    cdr:unsupport
+    con:support
+    car:support
+    cdr:support
 Interpret:
     interact:unsupport
     interprt:unsupport

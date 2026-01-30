@@ -51,11 +51,16 @@ def evaluate(equation,env):
             return equation
         if issymbol(equation,env):
             return env.bounds.get(equation)
+        if equation is nil:
+            return nil
         raise Exception(f"{equation} can't be caculate")
         
 
     
     first = equation.first
+    #nil
+    if first is nil:
+        return nil
     #operator
     if isoperator(first,env):
         if issymbol(first,env):
@@ -124,7 +129,7 @@ def assign(env,args):
         pass
     else:
         symbol = args.first
-        equation = args.rest
+        equation = args.rest.first
         value = evaluate(equation,env)
         env.bound(symbol,value)
 

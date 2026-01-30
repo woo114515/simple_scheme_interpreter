@@ -14,3 +14,17 @@ if __name__ == '__main__':
     tr = LinkList('and',LinkList(True,LinkList(True,nil)))
     print(evaluate(tr,glo))
     print(evaluate(b,glo))
+
+    #define
+    definell = LinkList('define',LinkList('defll',LinkList(1,nil)))
+    evaluate(definell,glo)
+
+
+    #cons,car,cdr
+    con = LinkList('cons',LinkList(2,LinkList(nil,nil)))
+    
+    defa = LinkList('define',LinkList('a',LinkList(con,nil)))
+    evaluate(defa,glo)
+    car = LinkList('car',LinkList('a',nil))
+    print(evaluate(car,glo))
+    

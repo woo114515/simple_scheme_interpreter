@@ -33,8 +33,13 @@ def isnull(num):
         return True
     return False
 
-def makecon(first,rest):
-    return LinkList(first,rest)
+def makecons(first,rest):
+    if isinstance(rest,LinkList):
+        return LinkList(first,rest)
+    if rest is nil:
+        return LinkList(first,rest)
+    raise Exception(f'{first} and {rest} cannot form a list')
+    
 
 def fcar(lists):
     assert isinstance(lists,LinkList),f"{lists} must be a list"
@@ -74,13 +79,15 @@ def fbegin(equations,env):
         t = t.rest
     return value
 
+
+
 add = procedure(f_add,2)
 minus = procedure(f_minus,2)
 multiple = procedure(f_multiple,2)
 devision = procedure(f_devision,2)
 odd = procedure(isodd,1)
 null = procedure(isnull,1)
-con = procedure(makecon,2)
+cons = procedure(makecons,2)
 car = procedure(fcar,1)
 cdr = procedure(fcdr,1)
 length = procedure(flength,1)
@@ -89,6 +96,6 @@ fuc_or = procedure(f_or,None,True)
 fuc_begin = procedure(fbegin,None,True)
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
-                'odd?':odd,'null?':null,"con":con,"car":car,
+                'odd?':odd,'null?':null,"cons":cons,"car":car,
                 "cdr":cdr,"length":length,"and":fuc_and,"or":fuc_or,
                 "begin":fuc_begin}
