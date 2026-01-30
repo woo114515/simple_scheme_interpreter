@@ -10,6 +10,11 @@ Function:
     car:support
     cdr:support
     if:support
+    cond:support
+    +-*/><:support
+    display:support
+    isnum,isnumber,isboolean:support
+    
 Interpret:
     interact:unsupport
     interprt:unsupport

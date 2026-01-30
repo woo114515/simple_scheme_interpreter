@@ -54,5 +54,17 @@ if __name__ == '__main__':
     eqa_cond = LinkList('cond',LinkList(eqa_c1,LinkList(eqa_c2,nil)))
     print(evaluate(eqa_cond,glo))
     print('*'*10)
+
+    #><
+    gt = LinkList('>',LinkList(3,LinkList(2,nil)))
+    lt = LinkList('<',LinkList(3,LinkList(2,nil)))
+    print(evaluate(gt,glo))
+    print(evaluate(lt,glo))
+    print('*'*10)
     
-    
+    #display
+    disp = LinkList('display',LinkList(1,nil))
+    displn = LinkList('displayln',LinkList(2,nil))
+    evaluate(disp,glo)
+    evaluate(displn,glo)
+    print('*'*10)

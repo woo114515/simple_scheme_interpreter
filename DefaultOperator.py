@@ -33,6 +33,16 @@ def isnull(num):
         return True
     return False
 
+def greater_than(a,b):
+    if a>b:
+        return True
+    return False
+
+def less_than(a,b):
+    if a<b:
+        return True
+    return False
+
 def makecons(first,rest):
     if isinstance(rest,LinkList):
         return LinkList(first,rest)
@@ -113,12 +123,33 @@ def fcond(equation,env):
                 return value
     return None
 
+def display(content):
+    print(content,end='')
+
+def dsiplayln(content):
+    print(content)
+
+def boolean_to_scheme(value):
+    if type(value) is bool:
+        return True
+    return False
+
+def isnum(var):
+    return isinstance(var,int)
+
+def isnumber(var):
+    return isinstance(var,int) or isinstance(var,float)
+
+
+
 add = procedure(f_add,2)
 minus = procedure(f_minus,2)
 multiple = procedure(f_multiple,2)
 devision = procedure(f_devision,2)
 odd = procedure(isodd,1)
 null = procedure(isnull,1)
+greater = procedure(greater_than,2)
+less = procedure(less_than,2)
 cons = procedure(makecons,2)
 car = procedure(fcar,1)
 cdr = procedure(fcdr,1)
@@ -128,8 +159,17 @@ fuc_or = procedure(f_or,None,True)
 fuc_begin = procedure(fbegin,None,True)
 fuc_if = procedure(fif,None,True)
 fuc_cond = procedure(fcond,None,True)
+fuc_display = procedure(display,1)
+fuc_displayln = procedure(dsiplayln,1)
+fuc_isboolean = procedure(boolean_to_scheme,1)
+fuc_isnum = procedure(isnum,1)
+fuc_isnumber = procedure(isnumber,1)
+
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
                 "cdr":cdr,"length":length,"and":fuc_and,"or":fuc_or,
-                "begin":fuc_begin,"if":fuc_if,"cond":fuc_cond}
+                "begin":fuc_begin,"if":fuc_if,"cond":fuc_cond,
+                ">":greater,"<":less,"display":fuc_display,
+                "displayln":fuc_displayln,"boolean?":fuc_isboolean,
+                "number?":fuc_isnumber,"num?":fuc_isnum}
