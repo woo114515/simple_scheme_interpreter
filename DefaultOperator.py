@@ -79,6 +79,22 @@ def fbegin(equations,env):
         t = t.rest
     return value
 
+def fif(equation,env):
+    assert isinstance(equation,LinkList)
+    predicate = equation.first
+    consequent = equation.rest.first
+    alternative = None
+    if not equation.rest.rest is nil:
+        alternative = equation.rest.rest.first
+    condition = scheme_eval.evaluate(predicate,env)
+    if condition:
+        value = scheme_eval.evaluate(consequent,env)
+    else:
+        value = None
+        if alternative!=None:
+            value = scheme_eval.evaluate(alternative,env)
+    return value
+
 
 
 add = procedure(f_add,2)
@@ -94,8 +110,9 @@ length = procedure(flength,1)
 fuc_and = procedure(fand,None,True)
 fuc_or = procedure(f_or,None,True)
 fuc_begin = procedure(fbegin,None,True)
+fuc_if = procedure(fif,None,True)
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
                 "cdr":cdr,"length":length,"and":fuc_and,"or":fuc_or,
-                "begin":fuc_begin}
+                "begin":fuc_begin,"if":fuc_if}

@@ -9,6 +9,7 @@ Function:
     con:support
     car:support
     cdr:support
+    if:support
 Interpret:
     interact:unsupport
     interprt:unsupport
