@@ -7,12 +7,11 @@ from LinkList import *
 from Frame import *
 from scheme_eval import *
 
-def interact():
+def interact(globe_env):
     
     inpu = input(">>>\n")
     expr = intepret(inpu)
     print(expr)
-    globe_env = Frame()
     outpu = str(evaluate(expr, globe_env))
     print(outpu)
 
@@ -80,9 +79,18 @@ def intepret(inpu):
         return inpu
     else:
         inpu_list = format_string(inpu[1:len(inpu)-1])
+        
+        for i in range(len(inpu_list)):
+            if type(inpu_list[i]) == str and inpu_list[i] >= '0' and inpu_list[i] <= '9':
+                inpu_list[i] = eval(inpu_list[i])
+        
         for i in range(len(inpu_list)-1,-1,-1):
             pair = LinkList(inpu_list[i], pair)
+    
 
     return pair
         
-    
+def interact_mode():
+    globe_env = Frame()
+    while True:
+        interact(globe_env)
