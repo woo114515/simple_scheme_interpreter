@@ -166,8 +166,9 @@ def islist(var):
         return False
     t = var
     while not t is nil:
-        if isinstance(var,LinkList):
+        if isinstance(t.first,LinkList):
             return False
+        t = t.rest
     return True
 
 def isprocedure(var,env):
