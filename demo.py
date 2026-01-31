@@ -69,3 +69,6 @@ if __name__ == '__main__':
     evaluate(disp,glo)
     evaluate(displn,glo)
     print('*'*10)
+
+    #isatom,isnum,isnumber,islist
+    

@@ -45,42 +45,46 @@ def evaluate(equation,env):
     :param equation: is LinkList 
     :param frame: is Frame
     '''
-    assert isinstance(env,Frame)
-    if not isinstance(equation,LinkList):
-        if isnumber(equation):
-            return equation
-        if issymbol(equation,env):
-            return env.bounds.get(equation)
-        if equation is nil:
-            return nil
-        raise Exception(f"{equation} can't be caculate")
+    try:
+            
+        assert isinstance(env,Frame)
+        if not isinstance(equation,LinkList):
+            if isnumber(equation):
+                return equation
+            if issymbol(equation,env):
+                return env.bounds.get(equation)
+            if equation is nil:
+                return nil
+            raise Exception(f"{equation} can't be caculate")
+            
+
         
+        first = equation.first
+        #nil
+        if first is nil:
+            return nil
+        #operator
+        if isoperator(first,env):
+            if issymbol(first,env):
+                operator = env.get(first)
+            else:
+                operator = operator_dic[first]
+            args = equation.rest#this might be changed later
+            return apply(operator,env,args)
+        #number
+        if isnumber(first):
+            return first
 
-    
-    first = equation.first
-    #nil
-    if first is nil:
-        return nil
-    #operator
-    if isoperator(first,env):
-        if issymbol(first,env):
-            operator = env.get(first)
-        else:
-            operator = operator_dic[first]
-        args = equation.rest#this might be changed later
-        return apply(operator,env,args)
-    #number
-    if isnumber(first):
-        return first
-
-    
-    #define
-    if isdefine(first):
-        args = equation.rest#this might be changed later
-        assign(env,args)
-    
-    #symbols
-    pass
+        
+        #define
+        if isdefine(first):
+            args = equation.rest#this might be changed later
+            assign(env,args)
+        
+    except Exception as e:
+        print(f'{equation} failed')
+        print(e)
+        raise e
 
 def apply(operator,env,args):
     '''
