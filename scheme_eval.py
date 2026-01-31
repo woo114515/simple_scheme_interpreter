@@ -79,7 +79,7 @@ def evaluate(equation,env):
         #define
         if isdefine(first):
             args = equation.rest#this might be changed later
-            assign(env,args)
+            return assign(env,args)
         
     except Exception as e:
         print(f'{equation} failed')
@@ -125,17 +125,18 @@ def assign(env,args):
     if isinstance(args.first,LinkList):
         # defining function
         symbol = args.first.first
-        equation = args.rest
+        equation = args.rest.first
         argument = args.first.rest
         func = Lambda(env,argument,equation)
         fuct = procedure(func,flength(argument))
         env.bound(symbol,fuct)
-        pass
+        
     else:
         symbol = args.first
         equation = args.rest.first
         value = evaluate(equation,env)
         env.bound(symbol,value)
+    return symbol
 
 def Lambda(env,argument,equation):
     '''
