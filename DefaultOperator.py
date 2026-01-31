@@ -193,6 +193,14 @@ def remainder(a,b):
         return -(abs(a)%b)
     return a%b
 
+def makelist(items,env):
+    assert isinstance(items,LinkList),TypeError(f'{items} is not a list')
+    t = items
+    while not t is nil:
+        t.first = scheme_eval.evaluate(t.first,env)
+        t = t.rest
+    return items
+
 add = procedure(f_add,2)
 minus = procedure(f_minus,2)
 multiple = procedure(f_multiple,2)
@@ -222,6 +230,7 @@ fuc_islist = procedure(islist,1)
 fuc_isprocedure = procedure(isprocedure,1,True)
 fuc_abs = procedure(abs,1)
 fuc_remainder = procedure(remainder,2)
+fuc_list = procedure(makelist,None,True)
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
@@ -232,4 +241,4 @@ operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 "number?":fuc_isnumber,"num?":fuc_isnum,
                 "symbol?":fuc_issymbol,"atom?":fuc_isatom,"list?":
                 fuc_islist,"procedure?":fuc_isprocedure,"abs":fuc_abs
-                ,"remainder":fuc_remainder}
+                ,"remainder":fuc_remainder,"list":fuc_list}

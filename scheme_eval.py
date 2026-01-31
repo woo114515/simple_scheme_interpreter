@@ -81,6 +81,8 @@ def evaluate(equation,env):
             args = equation.rest#this might be changed later
             return assign(env,args)
         
+        return equation
+        
     except Exception as e:
         print(f'{equation} failed')
         print(e)

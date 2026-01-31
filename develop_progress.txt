@@ -16,6 +16,7 @@ Function:
     isnum,isnumber,isboolean:support
     abs,remainder:support
     atom?list?:support
+    list:support
     
 Interpret:
     interact:unsupport
