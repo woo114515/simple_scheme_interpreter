@@ -69,3 +69,10 @@ if __name__ == '__main__':
     evaluate(disp,glo)
     evaluate(displn,glo)
     print('*'*10)
+
+    #remainder abs
+    remainder = LinkList('remainder',LinkList(-7,LinkList(3,nil)))
+    abse = LinkList('abs',LinkList(-1,nil))
+    print(evaluate(remainder,glo))
+    print(evaluate(abse,glo))
+    print('*'*10)
