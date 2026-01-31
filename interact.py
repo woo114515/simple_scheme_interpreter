@@ -8,12 +8,15 @@ from Frame import *
 from scheme_eval import *
 
 def interact(globe_env):
-    
-    inpu = input(">>>\n")
-    expr = intepret(inpu)
-    print(expr)
-    outpu = str(evaluate(expr, globe_env))
-    print(outpu)
+    try:
+        inpu = input(">>>\n")
+        expr = intepret(inpu)
+        print(expr)
+        outpu = str(evaluate(expr, globe_env))
+        print(outpu)
+    except Exception as e:
+        print(f'{inpu} failed')
+        print(e)
 
 def intepret(inpu):
         
