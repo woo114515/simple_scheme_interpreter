@@ -9,9 +9,8 @@ from scheme_eval import *
 
 def interact(globe_env):
     try:
-        inpu = input(">>>\n")
+        inpu = input(">>> ")
         expr = intepret(inpu)
-        print(expr)
         outpu = str(evaluate(expr, globe_env))
         print(outpu)
     except Exception as e:
@@ -19,80 +18,64 @@ def interact(globe_env):
         print(e)
 
 def intepret(inpu):
-        
-    pair = nil
-    
-    def format_string(string):
-        
-        class stack:
-            def __init__(self, name):
-                self.name = name
-                self.stimulate = []
-                self.index = -1
-            def push(self, val):
-                self.stimulate.append(val)
-                self.index += 1
-            def pop(self):
-                self.index -= 1
-                return self.stimulate[self.index+1]
-        
-        brackets = stack("brackets")
-        list_formated = []
-        is_new_arg = True
-        is_first_space = False
-        is_sub = False
-        index = 0
+    def type_translate(atom):
+        try:
+            return int(atom)
+        except ValueError:
+            try:
+                return float(atom)
+            except ValueError:
+                pass
+        if atom == '#t':
+            return True
+        if atom == '#f':
+            return False
+        if atom == 'nil':
+            return nil
+        return atom
 
-        for i in range(len(string)):
-            
-            # ()
+    def tokenize(source):
+        tokens = []
+        current = ''
+        for ch in source:
+            if ch in '()':
+                if current:
+                    tokens.append(current)
+                    current = ''
+                tokens.append(ch)
+            elif ch.isspace():
+                if current:
+                    tokens.append(current)
+                    current = ''
+            else:
+                current += ch
+        if current:
+            tokens.append(current)
+        return tokens
 
-            if string[i] == '(':
-                brackets.push(i)
-                is_sub = True
-            elif string[i] == ')':
-                if brackets.index > 0:
-                    brackets.pop()
-                else:
-                    start = brackets.pop()
-                    list_formated.append(intepret(string[start:i+1]))
-                # still inside a parent expression if the stack isn't empty
-                is_sub = brackets.index >= 0
-            # space
+    def parse_tokens(tokens):
+        if not tokens:
+            raise Exception('empty input')
+        token = tokens.pop(0)
+        if token == '(':
+            elements = []
+            while tokens and tokens[0] != ')':
+                elements.append(parse_tokens(tokens))
+            if not tokens:
+                raise Exception('missing closing parenthesis')
+            tokens.pop(0)  # drop ')'
+            pair = nil
+            for element in reversed(elements):
+                pair = LinkList(element, pair)
+            return pair
+        if token == ')':
+            raise Exception('unexpected closing parenthesis')
+        return type_translate(token)
 
-            # not space
-            elif string[i] == ' ':
-                if is_first_space:
-                    index +=1
-                    is_first_space = False
-                    is_new_arg = True 
-            
-            # is space
-            elif not is_sub:
-                if is_new_arg:
-                    list_formated.append(string[i])
-                    is_new_arg = False
-                    is_first_space = True
-                else:
-                    list_formated[index] += string[i]
-        
-        return list_formated
+    tokens = tokenize(inpu)
+    return parse_tokens(tokens)
 
-    if inpu[0] != '(':
-        return inpu
-    else:
-        inpu_list = format_string(inpu[1:len(inpu)-1])
-        
-        for i in range(len(inpu_list)):
-            if type(inpu_list[i]) == str and inpu_list[i] >= '0' and inpu_list[i] <= '9':
-                inpu_list[i] = eval(inpu_list[i])
-        
-        for i in range(len(inpu_list)-1,-1,-1):
-            pair = LinkList(inpu_list[i], pair)
-    
 
-    return pair
-        
 def interact_mode():
     globe_env = Frame()
     while True:
