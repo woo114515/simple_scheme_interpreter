@@ -14,6 +14,7 @@ Function:
     +-*/><:support
     display:support
     isnum,isnumber,isboolean:support
+    abs,remainder:support
     atom?list?:untest
     
 Interpret:

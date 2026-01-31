@@ -179,6 +179,18 @@ def isprocedure(var,env):
             return True
     return False
 
+def abs(var):
+    assert isnumber(var),TypeError(f"{var} is not a number")
+    if var<0:
+        return -var
+    return var
+
+def remainder(a,b):
+    assert isnumber(a),TypeError(f"{a} is not a number")
+    assert isnumber(b),TypeError(f"{b} is not a number")
+    if a<0:
+        return -(abs(a)%b)
+    return a%b
 
 add = procedure(f_add,2)
 minus = procedure(f_minus,2)
@@ -207,7 +219,8 @@ fuc_issymbol = procedure(issymbol,1,True)
 fuc_isatom = procedure(isatom,1,True)
 fuc_islist = procedure(islist,1)
 fuc_isprocedure = procedure(isprocedure,1,True)
-
+fuc_abs = procedure(abs,1)
+fuc_remainder = procedure(remainder,2)
 
 operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 'odd?':odd,'null?':null,"cons":cons,"car":car,
@@ -217,4 +230,5 @@ operator_dic = {'+':add,'-':minus,'*':multiple,'/':devision,
                 "displayln":fuc_displayln,"boolean?":fuc_isboolean,
                 "number?":fuc_isnumber,"num?":fuc_isnum,
                 "symbol?":fuc_issymbol,"atom?":fuc_isatom,"list?":
-                fuc_islist,"procedure?":fuc_isprocedure}
+                fuc_islist,"procedure?":fuc_isprocedure,"abs":fuc_abs
+                ,"remainder":fuc_remainder}
