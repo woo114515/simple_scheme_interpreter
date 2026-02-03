@@ -2,3 +2,7 @@ test/
 temp/
 draft.md
 __pycache__/
+*demo.py
+*.txt
+*test.py
+manual
