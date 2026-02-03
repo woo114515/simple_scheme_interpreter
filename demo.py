@@ -21,7 +21,7 @@ if __name__ == '__main__':
     b = LinkList('begin',LinkList(d,LinkList(l,nil)))
     tr = LinkList('and',LinkList(True,LinkList(True,nil)))
     print(evaluate(tr,glo))
-    print(evaluate(b,glo))
+    #print(evaluate(b,glo))
     print('*'*10)
     #define
     definell = LinkList('define',LinkList('defll',LinkList(1,nil)))
@@ -76,3 +76,8 @@ if __name__ == '__main__':
     print(evaluate(remainder,glo))
     print(evaluate(abse,glo))
     print('*'*10)
+
+    dic = {'a':12}
+    print(dic)
+    dic['a'] = 10
+    print(dic)

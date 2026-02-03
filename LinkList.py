@@ -27,6 +27,7 @@ class LinkList:
     
     def __next__(self):
         if self.current is nil:
+            self.current = self
             raise StopIteration
         else:
             value = self.current.first
