@@ -1,7 +1,0 @@
-input:interactive(in terminal)/static(from file)
-encode:interpret string into LinkList form
-calculate:compute equation in LinkList form in specific frame
-1:dispatch,figure out which type of command it is,
-including procedure(default or self-define),process control
-(branch or loop),assignment(value or function),symbol
-2:compute
